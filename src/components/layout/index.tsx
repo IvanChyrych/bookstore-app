@@ -10,7 +10,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({children}) => {
     return(
-        <div className="d-flex">
+        <div className="d-flex flex-column" style={{minHeight:'100vh'}}>
             <Header/>
             <div className="w-75">
                 <Main>
