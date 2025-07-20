@@ -7,6 +7,11 @@ interface CardProps {
     price: string,
 }
 
+function toggleFavicon(e:React.MouseEvent<HTMLElement>){
+    e.preventDefault()
+    e.currentTarget.className=e.currentTarget.className==='bi bi-heart'?'bi bi-heart-fill':'bi bi-heart'
+}
+
 export const Card: React.FC<CardProps> = ({ image,title,price,subtitle }) => {
     return (
         <div className="card" style={{width: '18rem'}}>
@@ -16,6 +21,7 @@ export const Card: React.FC<CardProps> = ({ image,title,price,subtitle }) => {
             <p className="card-text">{subtitle}</p>
              <p className="card-price">{price}</p>
             <a href="#" className="btn btn-primary">Go somewhere</a>
+            <i className="bi bi-heart" style={{cursor:"pointer"}} onClick={toggleFavicon}></i>
         </div>
         </div>
     );
