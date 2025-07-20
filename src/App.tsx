@@ -1,16 +1,15 @@
 import './styles.scss'
-import { Layout } from './components/layout'
-import { NewBookReleases } from './pages/NewBookReleases'
+
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import { router } from './router'
+import { RouterProvider } from 'react-router-dom'
 
 export function App() {
 
   return (
     <Provider store={store}>
-      <Layout>
-        <NewBookReleases/> 
-      </Layout>
+      <RouterProvider router={router}/>
     </Provider>  
   )
 }
