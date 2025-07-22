@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from "react";
 import type { Book } from "../../redux/book-slice";
+import { Link } from "react-router-dom";
 
 export const Card: React.FC<{book:Book}> =({book}) => {
     const[isFavourite,setIsFavourite]=useState(false)
@@ -29,10 +30,9 @@ export const Card: React.FC<{book:Book}> =({book}) => {
         <div className="card" style={{width: '18rem'}}>
         <img src={book.image} className="card-img-top" alt="..."/>
         <div className="card-body">
-            <h5 className="card-title">{book.title}</h5>
+            <Link to={`/books/${book.isbn13}`} className="card-title">{book.title}</Link>
             <p className="card-text">{book.subtitle}</p>
              <p className="card-price">{book.price}</p>
-            <a href="#" className="btn btn-primary">Go somewhere</a>
             <i className={isFavourite?'bi bi-heart-fill':"bi bi-heart"} style={{cursor:"pointer"}} 
             onClick={()=>toggleFavicon(book)}></i>
         </div>
