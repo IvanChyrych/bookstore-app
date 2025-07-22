@@ -31,10 +31,7 @@ export const NewBookReleases:React.FC = () => {
     return books.map((book:Book)=>(
     <Card 
         key={book.isbn13} 
-        title={book.title}
-        subtitle={book.subtitle||'no description provided'}
-        image={book.image}
-        price={book.price||'price not available'}
+        book={book}
     />));
     }
 

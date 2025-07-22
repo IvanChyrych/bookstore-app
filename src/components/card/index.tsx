@@ -1,27 +1,40 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
+import type { Book } from "../../redux/book-slice";
 
-interface CardProps {
-    image: string,
-    title: string,
-    subtitle: string,
-    price: string,
-}
+export const Card: React.FC<{book:Book}> =({book}) => {
+    const[isFavourite,setIsFavourite]=useState(false)
 
-function toggleFavicon(e:React.MouseEvent<HTMLElement>){
-    e.preventDefault()
-    e.currentTarget.className=e.currentTarget.className==='bi bi-heart'?'bi bi-heart-fill':'bi bi-heart'
-}
+    useEffect(()=>{
+        const favoritesBooks: Book[] = JSON.parse(localStorage.getItem("favoritesBooks") || "[]");
+        const isBookFavourite = favoritesBooks.some((favBook:Book)=>favBook.isbn13===book.isbn13)
+        setIsFavourite(isBookFavourite)
+    },[book.isbn13])
 
-export const Card: React.FC<CardProps> = ({ image,title,price,subtitle }) => {
+    function  toggleFavicon(book:Book) {
+        const favoritesBooks: Book[] = JSON.parse(localStorage.getItem("favoritesBooks") || "[]");
+        
+        const index = favoritesBooks.findIndex(favBook=>favBook.isbn13===book.isbn13)
+
+        if (index!==-1) {
+            favoritesBooks.splice(index, 1);
+        }
+        else{
+            favoritesBooks.push(book)
+        }
+        localStorage.setItem("favoritesBooks", JSON.stringify(favoritesBooks));
+        setIsFavourite(!isFavourite)
+    }
+
     return (
         <div className="card" style={{width: '18rem'}}>
-        <img src={image} className="card-img-top" alt="..."/>
+        <img src={book.image} className="card-img-top" alt="..."/>
         <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{subtitle}</p>
-             <p className="card-price">{price}</p>
+            <h5 className="card-title">{book.title}</h5>
+            <p className="card-text">{book.subtitle}</p>
+             <p className="card-price">{book.price}</p>
             <a href="#" className="btn btn-primary">Go somewhere</a>
-            <i className="bi bi-heart" style={{cursor:"pointer"}} onClick={toggleFavicon}></i>
+            <i className={isFavourite?'bi bi-heart-fill':"bi bi-heart"} style={{cursor:"pointer"}} 
+            onClick={()=>toggleFavicon(book)}></i>
         </div>
         </div>
     );
