@@ -2,6 +2,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { requestBooks, requestSearchResults } from "../services/book";
 
 export interface Book{
+    id:string,
     title:string,
     subtitle:string,
     image:string,
@@ -84,7 +85,7 @@ async({search,page},{rejectWithValue})=>{
             .addCase(fetchSearchResults.fulfilled,(state,action)=>{
                 const totalNumber=Number(action.payload.total);
                 state.isLoading=false;
-                state.list=action.payload.books.map((book)=>({...book,isFavorite:false}));
+                state.list=action.payload.books
                 state.pagesCount=Math.ceil(totalNumber>1000?100:totalNumber/10);
             })
             .addCase(fetchSearchResults.rejected,(state,action)=>{

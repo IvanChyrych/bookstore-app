@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { requestBookDetails } from "../services/book";
 
 export interface BookItem{
+    quantity?: number|1
     error: string
     title: string,
     subtitle: string
@@ -45,7 +46,7 @@ export const fetchBook = createAsyncThunk<BookItem,string>(
 )
 
 export const bookItemSlice = createSlice({
-    name: 'bookItem',
+    name: 'book',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
