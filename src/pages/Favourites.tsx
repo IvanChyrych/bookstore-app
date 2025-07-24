@@ -1,5 +1,5 @@
 import React from "react";
-import type { Book } from "../redux/book-slice";
+import type { Book } from "../redux/books-slice";
 import { Card } from "../components/card";
 import { Title } from "../components/title";
 

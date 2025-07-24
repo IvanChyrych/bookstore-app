@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { useSelector } from "react-redux";
-import {fetchBooks} from "../redux/book-slice";
-import type { Book } from "../redux/book-slice";
+import {fetchBooks} from "../redux/books-slice";
+import type { Book } from "../redux/books-slice";
 import { Card } from "../components/card";
 import { Title } from "../components/title";
 import { useAppDispatch } from "../redux/store";

@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import type { Book } from "../../redux/book-slice";
+import type { Book } from "../../redux/books-slice";
 import { Link } from "react-router-dom";
 
 export const Card: React.FC<{book:Book}> =({book}) => {

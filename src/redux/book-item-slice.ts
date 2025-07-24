@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { requestBookDetails } from "../services/book";
 
 export interface BookItem{
     error: string
@@ -35,19 +36,7 @@ export const fetchBook = createAsyncThunk<BookItem,string>(
 'bookItem/fetchBook',
     async(isbn13:string,{rejectWithValue}) => {
     try{
-        const response = await fetch(`https://api.itbook.store/1.0/books/${isbn13}`);
-    
-    if (!response.ok) {
-        throw new Error('Failed to fetch book');
-    }
-    const data=await response.json();
-    return {...data,
-        pdf:{
-        'Chapter 2': 'https://itbook.store/files/9781617294136/chapter2.pdf',
-        'Chapter 5': 'https://itbook.store/files/9781617294136/chapter5.pdf'
-        }
-
-    };
+        return await requestBookDetails(isbn13)
     }catch (error){
         return rejectWithValue(
             typeof error === 'string' ? error : 'An error occurred while fetching the book'
