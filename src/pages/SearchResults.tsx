@@ -8,6 +8,7 @@ import { fetchSearchResults, type Book } from "../redux/books-slice";
 import { Spinner } from "../components/spinner";
 import { Card } from "../components/card";
 import { useAppDispatch, type RootState } from "../redux/store";
+import { Pagination } from "../components/pagination";
 
 export const SearchResults:React.FC=()=>{
     const dispatch=useAppDispatch()
@@ -17,6 +18,8 @@ export const SearchResults:React.FC=()=>{
     const books=useSelector((state:RootState)=>state.books.list)
     const loading=useSelector((state:RootState)=>state.books.isLoading)
     const error=useSelector((state:RootState)=>state.books.error)
+
+    const pagesCount=useSelector((state:RootState)=>state.books.pagesCount)
 
     useEffect(()=>{
         dispatch(fetchSearchResults({search:query,page:page||"1"}))
@@ -39,7 +42,8 @@ export const SearchResults:React.FC=()=>{
     return(
         <>
         <Title>search results for {query}</Title>
-        <div className="d-flex">
+        <Pagination pagesCount={pagesCount} currentPage={Number(page)} to={`search/${query}/`}></Pagination>
+        <div className="d-flex flex-column">
             {renderBooks()}
         </div>
         </>
