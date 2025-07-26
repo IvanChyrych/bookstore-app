@@ -27,7 +27,8 @@ interface BookState{
     isLoading:boolean,
     error: string|null,
     pagesCount:number,
-    favourites:Book[]
+    favourites:Book[],
+    total:string
 }
 
 const initialState: BookState={
@@ -35,6 +36,7 @@ const initialState: BookState={
     isLoading:false,
     error:null,
     pagesCount:0,
+    total:'',
     favourites: JSON.parse(localStorage.getItem('favoritesBooks')||'[]')
 }
 
@@ -68,7 +70,9 @@ async({search,page},{rejectWithValue})=>{
     initialState,
     reducers:{
         updateFavourites(state,action:PayloadAction<Book[]>){
-            state.favourites=action.payload
+            state.favourites=action.payload.map((book)=>{
+                return {...book, id:book.isbn13}    
+            })
         }
     },
     extraReducers:(builder)=>{
@@ -90,9 +94,12 @@ async({search,page},{rejectWithValue})=>{
                 state.error=null;
             })
             .addCase(fetchSearchResults.fulfilled,(state,action)=>{
+                state.total=action.payload.total
                 const totalNumber=Number(action.payload.total);
                 state.isLoading=false;
-                state.list=action.payload.books
+                state.list=action.payload.books.map((book)=>{
+                    return {...book,id:book.isbn13}});
+
                 state.pagesCount=Math.ceil(totalNumber>1000?100:totalNumber/10);
             })
             .addCase(fetchSearchResults.rejected,(state,action)=>{

@@ -20,6 +20,7 @@ export const SearchResults:React.FC=()=>{
     const error=useSelector((state:RootState)=>state.books.error)
 
     const pagesCount=useSelector((state:RootState)=>state.books.pagesCount)
+    const total=useSelector((state:RootState)=>state.books.total)
 
     useEffect(()=>{
         dispatch(fetchSearchResults({search:query,page:page||"1"}))
@@ -41,7 +42,7 @@ export const SearchResults:React.FC=()=>{
     )}
     return(
         <>
-        <Title>search results for {query}</Title>
+        <Title>found {total} results for {query}</Title>
         <Pagination pagesCount={pagesCount} currentPage={Number(page)} to={`search/${query}/`}></Pagination>
         <div className="d-flex flex-column">
             {renderBooks()}
