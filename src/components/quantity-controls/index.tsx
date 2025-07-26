@@ -25,8 +25,9 @@ export const QuantityControls:React.FC<QuantityControlProps>=({book})=>{
 
     function decreaseQuantity(book:BookItem){
         dispatch(updateItems(shoppingCart.map((cartItem:BookItem)=>cartItem.isbn13===book.isbn13
-        ?{...cartItem,quantity:cartItem.quantity-1}
-        :cartItem )))
+        ?{...cartItem,quantity:Math.max(cartItem.quantity-1,1)}
+        :cartItem 
+    )))
     }
 
     return(
