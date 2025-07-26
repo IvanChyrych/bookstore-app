@@ -1,4 +1,5 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk, } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { requestBooks, requestSearchResults } from "../services/book";
 
 export interface Book{
@@ -26,6 +27,7 @@ interface BookState{
     isLoading:boolean,
     error: string|null,
     pagesCount:number,
+    favourites:Book[]
 }
 
 const initialState: BookState={
@@ -33,6 +35,7 @@ const initialState: BookState={
     isLoading:false,
     error:null,
     pagesCount:0,
+    favourites: JSON.parse(localStorage.getItem('favoritesBooks')||'[]')
 }
 
 export const fetchBooks=createAsyncThunk<Book[],void>('books/fetchBooks',
@@ -63,7 +66,11 @@ async({search,page},{rejectWithValue})=>{
     const bookSlice=createSlice({
     name:'books',
     initialState,
-    reducers:{},
+    reducers:{
+        setFavourites(state,action:PayloadAction<Book[]>){
+            state.favourites=action.payload
+        }
+    },
     extraReducers:(builder)=>{
         builder
             .addCase(fetchBooks.pending,(state)=>{
@@ -95,4 +102,5 @@ async({search,page},{rejectWithValue})=>{
         }
     })
 
+export const {setFavourites}=bookSlice.actions 
 export const booksReducer=bookSlice.reducer;
