@@ -50,7 +50,7 @@ export const BookDetails:React.FC=()=>{
     }
 
     return(
-        <>
+        <div className="d-flex flex-column justify-content-center">
         <Title>{bookItem.title}</Title>
          <div className="card" style={{width: '18rem'}}>
         <img src={bookItem.image} className="card-img-top" alt="..."/>
@@ -60,6 +60,6 @@ export const BookDetails:React.FC=()=>{
         </div>
         <ShoppingCartButton book={bookItem} onAddToCart={AddToCart}/>
         </div>
-        </>
+        </div>
     )
 }

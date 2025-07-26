@@ -6,7 +6,7 @@ interface MainProps {
 
 export const Main:React.FC<MainProps> = ({children}) => {
     return (
-        <div className="d-flex">
+        <div className="d-flex justify-content-center">
             {children}
         </div>
     );

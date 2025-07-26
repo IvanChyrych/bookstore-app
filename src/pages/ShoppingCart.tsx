@@ -11,8 +11,8 @@ export const ShoppingCart:React.FC=()=>{
     const ShoppingCart=useSelector((state:RootState)=>state.cart.items)
 
     function renderShoppingCart(){
-        if(!ShoppingCart.length) return 'nothihg to display'
-        return ShoppingCart.map((book:BookItem)=>(
+        if(!ShoppingCart?.length) return 'nothihg to display'
+        return ShoppingCart?.map((book:BookItem)=>(
         <ShoppingCartItem 
         key={book.isbn13} 
         book={book} 
@@ -20,17 +20,17 @@ export const ShoppingCart:React.FC=()=>{
     }
 
     return(
-        <>
+        <div className="d-flex flex-column">
             <Title>Shopping cart</Title>
             {renderShoppingCart()}
 
             <div>
-                {ShoppingCart.length?<TotalValue/>:null}
-                {ShoppingCart.length?(
+                {ShoppingCart?.length?<TotalValue/>:null}
+                {ShoppingCart?.length?(
                  <button className="mb-3">check out</button>
                 ):null}
             </div>
-        </>
+        </div>
     )
 
 }

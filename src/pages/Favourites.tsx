@@ -18,11 +18,11 @@ const renderFavourites=()=>{
 }
 
     return(
-        <>
+        <div className="d-flex flex-column">
         <Title>Favorites ({favouriteBooks.length})</Title>
         <div className="d-flex flex-column">
             {renderFavourites()}
         </div>
-        </>
+        </div>
     )
 }

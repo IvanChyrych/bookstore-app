@@ -41,13 +41,13 @@ export const SearchResults:React.FC=()=>{
         )
     )}
     return(
-        <>
+        <div className="d-flex flex-column">
         <Title>found {total} results for {query}</Title>
         <Pagination pagesCount={pagesCount} currentPage={Number(page)} to={`search/${query}/`}></Pagination>
         <div className="d-flex flex-column">
             {renderBooks()}
         </div>
-        </>
+        </div>
     )
 
 }

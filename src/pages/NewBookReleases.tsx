@@ -34,11 +34,11 @@ export const NewBookReleases:React.FC = () => {
     }
 
     return (
-        <>
-        <Title>New book releases</Title>
         <div className="d-flex flex-column">
-            {renderBooks()}
+            <Title>New book releases</Title>
+            <div className="d-flex flex-column">
+                {renderBooks()}
+            </div>
         </div>
-        </>
     )
 }

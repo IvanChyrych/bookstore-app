@@ -28,7 +28,7 @@ export const ShoppingCartItem:React.FC<ShoppingCartItemProps> =({book})=>{
             <p>{book.authors}</p>
             <QuantityControls book={book}/>
             <p>{book.price}</p>
-            <i className="bi" onClick={()=>removeItem(book)}></i>
+            <i className="bi bi-x-lg" onClick={()=>removeItem(book)}></i>
         </div>
     )
 }
