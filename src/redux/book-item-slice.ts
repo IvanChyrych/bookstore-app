@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { requestBookDetails } from "../services/book";
 
 export interface BookItem{
-    quantity?: number|1
+    quantity: number|1
     error: string
     title: string,
     subtitle: string

@@ -67,7 +67,7 @@ async({search,page},{rejectWithValue})=>{
     name:'books',
     initialState,
     reducers:{
-        setFavourites(state,action:PayloadAction<Book[]>){
+        updateFavourites(state,action:PayloadAction<Book[]>){
             state.favourites=action.payload
         }
     },
@@ -102,5 +102,5 @@ async({search,page},{rejectWithValue})=>{
         }
     })
 
-export const {setFavourites}=bookSlice.actions 
+export const {updateFavourites}=bookSlice.actions 
 export const booksReducer=bookSlice.reducer;

@@ -8,7 +8,7 @@ import { fetchBook } from "../redux/book-item-slice";
 import type { BookItem } from "../redux/book-item-slice";
 import { Title } from "../components/title";
 import { ShoppingCartButton} from "../components/shopping-cart-button";
-import { setCount } from "../redux/shopping-cart-slice";
+import { updateItems } from "../redux/shopping-cart-slice";
 
 export const BookDetails:React.FC=()=>{
     const {id}=useParams()
@@ -35,7 +35,7 @@ export const BookDetails:React.FC=()=>{
             shoppingCart.push({...book,quantity:1})
         }
         localStorage.setItem('shopping-cart',JSON.stringify(shoppingCart))
-        dispatch(setCount(shoppingCart.length))
+        dispatch(updateItems(shoppingCart))
     }
 
     if (loading) {

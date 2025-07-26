@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import type { Book } from "../../redux/books-slice";
 import { Link } from "react-router-dom";
-import { setFavourites } from "../../redux/books-slice";
+import { updateFavourites } from "../../redux/books-slice";
 import { useAppDispatch } from "../../redux/store";
 
 export const Card: React.FC<{book:Book}> =({book}) => {
@@ -14,7 +14,7 @@ export const Card: React.FC<{book:Book}> =({book}) => {
         setIsFavourite(isBookFavourite)
     },[book.isbn13])
 
-    function  toggleFavicon(book:Book) {
+    function  toggleFavorite(book:Book) {
         const favoritesBooks: Book[] = JSON.parse(localStorage.getItem("favoritesBooks") || "[]");
         
         const index = favoritesBooks.findIndex(favBook=>favBook.isbn13===book.isbn13)
@@ -27,7 +27,7 @@ export const Card: React.FC<{book:Book}> =({book}) => {
         }
         localStorage.setItem("favoritesBooks", JSON.stringify(favoritesBooks));
         setIsFavourite(!isFavourite)
-        dispatch(setFavourites(favoritesBooks))
+        dispatch(updateFavourites(favoritesBooks))
     }
 
     return (
@@ -38,7 +38,7 @@ export const Card: React.FC<{book:Book}> =({book}) => {
             <p className="card-text">{book.subtitle}</p>
              <p className="card-price">{book.price}</p>
             <i className={isFavourite?'bi bi-heart-fill':"bi bi-heart"} style={{cursor:"pointer"}} 
-            onClick={()=>toggleFavicon(book)}></i>
+            onClick={()=>toggleFavorite(book)}></i>
         </div>
         </div>
     );
